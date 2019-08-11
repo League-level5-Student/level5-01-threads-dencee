@@ -16,7 +16,14 @@ public class ThreadedReverseGreeting {
         
         if( threadNum <= 50 ) {
             reverseGreet( threadNum + 1 );
-            createThread( threadNum ).start();
+            Thread r = createThread( threadNum );
+	    r.start();
+            try {
+		// Wait for thread to finish
+	        r.join();
+	    } catch (InterruptedException e) {
+		e.printStackTrace();
+	    }
         }
     }
     
